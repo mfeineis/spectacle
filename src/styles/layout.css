@@ -1,0 +1,112 @@
+/* Axioms */
+
+:root {
+  --border-thin: 1px;
+  --measure: 60ch;
+}
+
+* {
+  max-width: var(--measure);
+}
+
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-width: none;
+}
+
+.max-width\:measure {
+  max-width: var(--measure);
+}
+
+.max-width\:measure\/2 {
+  max-width: calc(var(--measure) / 2);
+}
+
+:root {
+  /* Units */
+  font-size: calc(1rem + 0.5vw);
+
+  /* Modular scale */
+  --ratio: 1.61803398875;
+  /*--ratio: 1.5;*/
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+}
+
+/* Primitives */
+
+.ly\:box {
+    @apply block;
+    background-color: inherit;
+    border-width: var(--border-thin);
+    outline: var(--border-thin) solid transparent;
+    outline-offset: calc(var(--border-thin)*-1);
+    padding: var(--s1);
+}
+
+.ly\:center {
+  @apply block ml-auto mr-auto text-center;
+  box-sizing: content-box;
+  max-width: var(--measure);
+}
+
+.ly\:cover {
+  @apply flex flex-col min-h-screen;
+  padding: var(--s1);
+}
+
+.ly\:frame {
+  @apply block relative;
+  padding-bottom: 66.66667%
+}
+
+.ly\:frame > * {
+  @apply absolute flex items-center justify-center inset-0;
+}
+
+.ly\:frame > img, .l\:frame > video {
+  @apply h-full object-cover w-full;
+}
+
+.ly\:image {
+  @apply block;
+}
+.ly\:image:after {
+  @apply block;
+  border: var(--border-thin) solid var(--color-dark);
+  background-image: paint(image-cross);
+  content: " ";
+}
+
+.ly\:sidebar > * {
+  @apply flex flex-wrap;
+}
+.ly\:sidebar > * > * {
+  @apply flex-grow;
+}
+.ly\:sidebar > * > *:last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 50%;
+}
+
+.ly\:stack {
+  @apply flex flex-col justify-start;
+}
+.ly\:stack > * + * {
+  margin-top: var(--s1);
+}
