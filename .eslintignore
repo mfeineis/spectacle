@@ -1,0 +1,8 @@
+assets/
+coverage/
+cypress/integration/examples/
+cypress/plugins/
+cypress/support/
+dist/
+node_modules/
+reports/

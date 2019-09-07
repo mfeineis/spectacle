@@ -1,0 +1,43 @@
+{
+  "name": "spectacle",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/mfeineis/spectacle",
+  "author": "Martin Feineis <mfeineis@users.noreply.github.com>",
+  "license": "Apache-2",
+  "private": true,
+  "browserslist": [
+    "ie 11"
+  ],
+  "scripts": {
+    "build": "yarn run build-elm && NODE_ENV=production rollup --config rollup.config.js",
+    "build-elm": "./elm make src/App.elm --output dist/app.js --optimize && NODE_ENV=production terser dist/app.js --compress 'pure_funcs=\"F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9\",pure_getters,keep_fargs=false,unsafe_comps,unsafe' | terser --mangle --output=dist/app.js",
+    "debug-elm": "./elm make src/App.elm --output dist/app.js",
+    "start": "serve -p 5000",
+    "watch": "NODE_ENV=development rollup --config rollup.config.js --watch"
+  },
+  "peerDependencies": {
+    "elm": "0.19.1"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "autoprefixer": "^9.6.1",
+    "browserslist": "^4.7.0",
+    "eslint": "^6.3.0",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-es5": "^1.4.1",
+    "eslint-plugin-immutable": "^1.0.0",
+    "eslint-plugin-jest": "^22.17.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.1.2",
+    "postcss-preset-env": "^6.7.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-terser": "^5.1.1",
+    "serve": "^11.1.0",
+    "tailwindcss": "^1.1.2",
+    "terser": "^4.2.1"
+  }
+}
