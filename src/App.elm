@@ -1,5 +1,6 @@
 module App exposing (main)
 
+import App.DataSource as DataSource exposing (DataSource, Token)
 import App.Page exposing (Intent(..))
 import Browser
 import Html
@@ -7,16 +8,23 @@ import Json.Decode as Decode exposing (Decoder, Value)
 
 
 type alias Model =
-    {}
+    { sources : List DataSource
+    }
 
 
 type Msg
     = Intent Intent
+    | SourceConnected ( Token, DataSource )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case Debug.log "update" msg of
+        Intent intent ->
+            ( model, Cmd.none )
+
+        SourceConnected ( token, src ) ->
+            ( model, Cmd.none )
 
 
 
@@ -36,12 +44,20 @@ flagsDecoder =
 
 init : Value -> () -> () -> ( Model, Cmd Msg )
 init json url navKey =
+    let
+        model =
+            { sources = []
+            }
+
+        cmds =
+            DataSource.connect SourceConnected
+    in
     case Decode.decodeValue flagsDecoder json of
         Ok flags ->
-            ( {}, Cmd.none )
+            ( model, cmds )
 
         Err reason ->
-            ( {}, Cmd.none )
+            ( model, cmds )
 
 
 subscriptions : Model -> Sub Msg
