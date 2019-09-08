@@ -78,7 +78,7 @@ footer {
   @apply absolute flex items-center justify-center inset-0;
 }
 
-.ly\:frame > img, .l\:frame > video {
+.ly\:frame > img, .ly\:frame > video {
   @apply h-full object-cover w-full;
 }
 
@@ -107,6 +107,6 @@ footer {
 .ly\:stack {
   @apply flex flex-col justify-start;
 }
-.ly\:stack > * + * {
+.ly\:stack:not(.--no-margin) > * + * {
   margin-top: var(--s1);
 }

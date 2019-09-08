@@ -1,5 +1,5 @@
 module App.Layout
-    exposing (box, center, cover, frame, image, sidebar, stack)
+    exposing (box, center, cover, frame, image, sidebar, sidebarWith, stack, stackWith)
 
 import Html exposing (Attribute, Html, div)
 import Html.Attributes as Attr exposing (class)
@@ -34,7 +34,17 @@ image src =
 sidebar : Html msg -> Html msg -> Html msg
 sidebar left right =
     Html.div [ class "ly:sidebar" ]
-      [ div [] 
+      [ div [ class "h-full" ] 
+          [ left
+          , right
+          ]
+      ]
+
+
+sidebarWith : List (Attribute msg) -> Html msg -> Html msg -> Html msg
+sidebarWith attrs left right =
+    Html.div ([ class "ly:sidebar" ] ++ attrs)
+      [ div [ class "h-full" ] 
           [ left
           , right
           ]
@@ -44,4 +54,9 @@ sidebar left right =
 stack : List (Html msg) -> Html msg
 stack =
     Html.div [ class "ly:stack" ]
+
+
+stackWith : List (Attribute msg) -> List (Html msg) -> Html msg
+stackWith attrs =
+    Html.div ([ class "ly:stack" ] ++ attrs)
 
